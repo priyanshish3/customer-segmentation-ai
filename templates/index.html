@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI-powered customer segmentation using K-Means clustering.">
+    <title>SegmentAI | Customer Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="page-shell">
+        <nav class="nav" aria-label="Main navigation">
+            <a class="brand" href="/" aria-label="SegmentAI home">
+                <span class="brand-mark">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17.5A3.5 3.5 0 1 0 4 10a3.5 3.5 0 0 0 0 7.5Zm16 0a3.5 3.5 0 1 0 0-7.5 3.5 3.5 0 0 0 0 7.5ZM12 9a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm0 13a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/></svg>
+                </span>
+                <span>Segment<span>AI</span></span>
+            </a>
+            <a class="nav-link" href="#about">How it works</a>
+        </nav>
+
+        <main>
+            <section class="hero">
+                <div class="hero-copy">
+                    <div class="eyebrow"><span></span> Machine learning insights</div>
+                    <h1>Know your customers.<br><em>Grow with clarity.</em></h1>
+                    <p class="hero-text">Turn customer data into clear, actionable segments with a K-Means powered prediction&mdash;built for smarter marketing decisions.</p>
+                    <div class="stats" aria-label="Project statistics">
+                        <div class="stat"><strong>200</strong><span>Customers studied</span></div>
+                        <div class="stat"><strong>5</strong><span>Unique segments</span></div>
+                        <div class="stat"><strong>3</strong><span>Data features</span></div>
+                    </div>
+                </div>
+
+                <div class="prediction-card" id="predict">
+                    <div class="card-heading">
+                        <span class="icon-box"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V9m6 10V5m6 14v-7m4 7H2"/></svg></span>
+                        <div><span class="step-label">Live prediction</span><h2>Find a customer segment</h2></div>
+                    </div>
+                    <p class="card-intro">Enter three customer attributes to generate an instant profile.</p>
+
+                    <form action="/predict" method="POST" class="prediction-form">
+                        <label for="age">Customer age</label>
+                        <div class="input-wrap">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21a8 8 0 0 0-16 0m8-10a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/></svg>
+                            <input id="age" type="number" name="age" min="18" max="100" step="1" placeholder="e.g. 28" required>
+                        </div>
+
+                        <label for="income">Annual income <span>(in &#8377; thousands)</span></label>
+                        <div class="input-wrap"><span class="currency">&#8377;</span><input id="income" type="number" name="income" min="0" max="500" step="0.1" placeholder="e.g. 65" required></div>
+
+                        <label for="score">Spending score <span>(1&ndash;100)</span></label>
+                        <div class="input-wrap">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.4 5.1 5.6.8-4 4 .9 5.6-4.9-2.7-4.9 2.7.9-5.6-4-4 5.6-.8L12 3Z"/></svg>
+                            <input id="score" type="number" name="score" min="1" max="100" step="1" placeholder="e.g. 72" required>
+                        </div>
+
+                        <button type="submit" class="primary-btn">Predict customer segment<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+                    </form>
+
+                    <div class="pulse-preview" aria-live="polite">
+                        <div class="pulse-top">
+                            <div>
+                                <span class="result-label">Live customer pulse</span>
+                                <h3 id="pulseTitle">Enter details to unlock a preview</h3>
+                            </div>
+                            <span class="pulse-score" id="pulseScore">--</span>
+                        </div>
+                        <div class="pulse-meter" aria-hidden="true"><span id="pulseBar"></span></div>
+                        <p id="pulseText">This preview updates before prediction, so the form feels more interactive and product-like.</p>
+                    </div>
+
+                    <p class="privacy-note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3m-9 0h8a2 2 0 0 1 2 2v7H6v-7a2 2 0 0 1 2-2Z"/></svg>Your inputs are used only for this prediction.</p>
+                </div>
+            </section>
+
+            <section class="about" id="about">
+                <div><span class="section-kicker">Behind the model</span><h2>From raw data to useful customer insight.</h2></div>
+                <div class="process-grid">
+                    <article><span>01</span><h3>Enter data</h3><p>Provide age, annual income and spending score.</p></article>
+                    <article><span>02</span><h3>Model analyzes</h3><p>Standardized data is compared across five K-Means clusters.</p></article>
+                    <article><span>03</span><h3>Get a strategy</h3><p>Receive a customer type and a tailored business recommendation.</p></article>
+                </div>
+            </section>
+        </main>
+        <footer><span>Built by Priyanshi Sharma</span><span>Python &middot; Flask &middot; Scikit-learn</span></footer>
+    </div>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
