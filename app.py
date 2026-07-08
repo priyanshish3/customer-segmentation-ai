@@ -13,6 +13,10 @@ kmeans = joblib.load("model/kmeans_model.pkl")
 def home():
     return render_template("index.html")
 
+@app.route("/home")
+def homepage():
+    return render_template("home.html")
+
 
 @app.route("/predict", methods=["POST"])
 def predict():
