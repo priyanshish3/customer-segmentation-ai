@@ -12,16 +12,36 @@
 </head>
 <body>
     <div class="page-shell">
-        <nav class="nav" aria-label="Main navigation">
-            <a class="brand" href="/" aria-label="SegmentAI home">
-                <span class="brand-mark">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17.5A3.5 3.5 0 1 0 4 10a3.5 3.5 0 0 0 0 7.5Zm16 0a3.5 3.5 0 1 0 0-7.5 3.5 3.5 0 0 0 0 7.5ZM12 9a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm0 13a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/></svg>
-                </span>
-                <span>Segment<span>AI</span></span>
-            </a>
-            <a class="nav-link" href="#about">How it works</a>
-        </nav>
+        
+<nav class="nav" aria-label="Main navigation">
 
+    <a class="brand" href="/">
+        <span>Segment<span>AI</span></span>
+    </a>
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+
+        <a href="#about">About</a>
+
+        {% if current_user.is_authenticated %}
+
+            <a href="/dashboard">Dashboard</a>
+
+            <a href="/logout">Logout</a>
+
+        {% else %}
+
+            <a href="/login">Login</a>
+
+            <a href="/signup">Sign Up</a>
+
+        {% endif %}
+
+    </div>
+
+</nav>
         <main>
             <section class="hero">
                 <div class="hero-copy">
@@ -73,7 +93,7 @@
                         </form>
 
                         {% endif %}
-                        
+
                     <div class="pulse-preview" aria-live="polite">
                         <div class="pulse-top">
                             <div>
