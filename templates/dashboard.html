@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | SegmentAI</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="topbar">
+        <h1>📊 SegmentAI Dashboard</h1>
+
+        <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+    <h3>Total Predictions</h3>
+    <h2>{{ total_predictions }}</h2>
+    </div>
+        <div class="card">
+            <h2>Customer Segments</h2>
+            <p>5</p>
+        </div>
+
+        <div class="card">
+            <h2>Model</h2>
+            <p>K-Means</p>
+        </div>
+
+    </div>
+
+    <div class="prediction-box">
+
+        <h2>Start New Prediction</h2>
+
+        <a href="/" class="predict-btn">
+            ➜ Go to Prediction
+        </a>
+
+    </div>
+
+</div>
+
+    <div class="chart-section">
+    <h2>Customer Segment Distribution</h2>
+
+    {% if total_predictions > 0 %}
+        <img src="{{ url_for('static', filename='images/pie_chart.png') }}"
+             alt="Pie Chart"
+             class="chart-img">
+    {% else %}
+        <p>No predictions available yet.</p>
+    {% endif %}
+  </div>
+   
+      <div class="history-section">
+    <h2>Prediction History</h2>
+
+    <table class="history-table">
+        <thead>
+            <tr>
+                <th>Age</th>
+                <th>Income</th>
+                <th>Score</th>
+                <th>Segment</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for p in predictions %}
+            <tr>
+                <td>{{ p.age }}</td>
+                <td>{{ p.income }}</td>
+                <td>{{ p.score }}</td>
+                <td>{{ p.segment }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+
+
+</body>
+</html>

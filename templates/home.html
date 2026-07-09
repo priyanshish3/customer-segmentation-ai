@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SegmentAI</title>
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 </head>
 
 <body>
@@ -17,11 +16,15 @@
 
     <div>
 
-        <a href="/login">Login</a>
-
-        <a href="/signup">Sign Up</a>
-
         <a href="/">Prediction</a>
+
+        {% if current_user.is_authenticated %}
+            <span style="margin:0 15px;font-weight:bold;">Welcome</span>
+            <a href="/logout">Logout</a>
+        {% else %}
+            <a href="/login">Login</a>
+            <a href="/signup">Sign Up</a>
+        {% endif %}
 
     </div>
 
@@ -29,20 +32,22 @@
 
 <section class="hero">
 
-<h1>AI Powered Customer Segmentation</h1>
+    <h1>AI Powered Customer Segmentation</h1>
 
-<p>
-Know your customers better using Machine Learning and K-Means Clustering.
-Predict customer type in seconds.
-</p>
+    <p>
+        Know your customers better using Machine Learning and K-Means Clustering.
+        Predict customer type in seconds.
+    </p>
 
-<div class="buttons">
+    <div class="buttons">
 
-<a href="/" class="btn">Try Prediction</a>
+        <div class="buttons">
 
-<a href="/login" class="btn2">Login</a>
+    <a href="/" class="btn">Try Prediction</a>
 
 </div>
+
+    </div>
 
 </section>
 

@@ -1,0 +1,130 @@
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7fb;
+}
+
+.container{
+    width:90%;
+    margin:40px auto;
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.topbar h1{
+    color:#0b5d3b;
+}
+
+.logout-btn{
+    background:#0b5d3b;
+    color:white;
+    padding:10px 20px;
+    text-decoration:none;
+    border-radius:8px;
+}
+
+.cards{
+    display:flex;
+    gap:20px;
+    margin-bottom:40px;
+}
+
+.card{
+    flex:1;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.card h2{
+    color:#555;
+}
+
+.card p{
+    font-size:32px;
+    color:#0b5d3b;
+    font-weight:bold;
+}
+
+.prediction-box{
+    background:white;
+    padding:40px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.predict-btn{
+    display:inline-block;
+    margin-top:20px;
+    background:#0b5d3b;
+    color:white;
+    text-decoration:none;
+    padding:15px 35px;
+    border-radius:8px;
+    font-size:18px;
+}
+
+/* Prediction History */
+
+.history-section{
+    margin-top:40px;
+    background:#fff;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.history-section h2{
+    color:#0b5d3b;
+    margin-bottom:20px;
+}
+
+.history-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.history-table th{
+    background:#0b5d3b;
+    color:white;
+    padding:12px;
+}
+
+.history-table td{
+    padding:12px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+}
+
+.history-table tr:hover{
+    background:#f3f8f5;
+}
+
+.chart-section{
+    margin-top:40px;
+    background:#fff;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+    text-align:center;
+}
+
+.chart-section h2{
+    color:#0b5d3b;
+    margin-bottom:20px;
+}
+
+.chart-img{
+    width:700px;
+    max-width:100%;
+    display:block;
+    margin:auto;
+}
