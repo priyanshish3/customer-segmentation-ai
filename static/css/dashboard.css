@@ -128,3 +128,40 @@ body{
     display:block;
     margin:auto;
 }
+
+/* ===== Customer Analytics ===== */
+
+.charts{
+    display:flex;
+    gap:25px;
+    justify-content:center;
+    align-items:flex-start;
+    flex-wrap:wrap;
+}
+
+.chart-box{
+    background:#fff;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    width:46%;
+}
+
+.chart-box h3{
+    text-align:center;
+    color:#0b5d3b;
+    margin-bottom:15px;
+}
+
+.chart-img{
+    width:100%;
+    border-radius:10px;
+}
+
+@media(max-width:900px){
+
+.chart-box{
+    width:100%;
+}
+
+}

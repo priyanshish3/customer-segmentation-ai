@@ -49,16 +49,32 @@
 </div>
 
     <div class="chart-section">
-    <h2>Customer Segment Distribution</h2>
+    <h2>Customer Analytics</h2>
 
     {% if total_predictions > 0 %}
-        <img src="{{ url_for('static', filename='images/pie_chart.png') }}"
-             alt="Pie Chart"
-             class="chart-img">
+
+    <div class="charts">
+
+        <div class="chart-box">
+    <h3>K-Means Cluster Visualization</h3>
+    <img src="{{ url_for('static',
+    filename='images/customer_segmentation.png') }}"
+         class="chart-img">
+</div>
+
+        <div class="chart-box">
+            <h3>Customer Count by Segment</h3>
+            <img src="{{ url_for('static', filename='images/bar_chart.png') }}"
+                 alt="Bar Chart"
+                 class="chart-img">
+        </div>
+
+    </div>
+
     {% else %}
         <p>No predictions available yet.</p>
     {% endif %}
-  </div>
+</div>
    
       <div class="history-section">
     <h2>Prediction History</h2>

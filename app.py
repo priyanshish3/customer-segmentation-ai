@@ -8,6 +8,7 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, login_
 from werkzeug.security import generate_password_hash, check_password_hash
 import matplotlib.pyplot as plt
 from collections import Counter
+import seaborn as sns
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
@@ -103,50 +104,74 @@ def dashboard():
 
     # Pie Chart Data
     segments = [p.segment for p in predictions]
+    count = Counter(segments)
 
     if segments:
-     count = Counter(segments)
+        # Pie Chart
+        plt.figure(figsize=(6, 6))
+        plt.pie(
+            list(count.values()),
+            labels=list(count.keys()),
+            autopct="%1.1f%%",
+            startangle=90,
+        )
+        plt.title("Customer Distribution")
+        plt.tight_layout()
+        plt.savefig("static/images/pie_chart.png", dpi=300)
+        plt.close()
 
-    plt.figure(figsize=(8,6))
+        # Bar Chart
+        plt.figure(figsize=(8, 5))
+        colors = ["#0b5d3b", "#1e88e5", "#ff9800", "#9c27b0", "#e91e63"]
+        keys = list(count.keys())
+        values = list(count.values())
+        plt.bar(
+    count.keys(),
+    count.values(),
+    color=["#4CAF50","#2196F3","#FF9800","#9C27B0","#E91E63"][:len(count)],
+    edgecolor="black",
+    linewidth=1.5
+)
+        plt.title("Customer Segments", fontsize=16)
+        plt.xlabel("Segment")
+        plt.ylabel("Number of Customers")
+        plt.xticks(rotation=15)
+        for i, value in enumerate(values):
+            plt.text(i, value + 0.1, str(value), ha="center", fontsize=12)
+        plt.tight_layout()
+        plt.savefig("static/images/bar_chart.png", dpi=300)
+        plt.close()
 
-    plt.pie(
-        count.values(),
-        labels=count.keys(),
-        autopct="%1.1f%%",
-        startangle=90,
-        pctdistance=0.75,
-        labeldistance=1.1
-    )
+        # Bubble Chart
+        df = pd.read_csv("dataset/Mall_Customers.csv")
 
-    plt.title("Customer Segments", fontsize=16)
+        plt.figure(figsize=(8,6))
 
-    plt.tight_layout()
+        sns.scatterplot(
+            data=df,
+            x="Annual Income (k$)",
+            y="Spending Score (1-100)",
+            hue="Spending Score (1-100)",
+            size="Annual Income (k$)",
+            palette="viridis",
+            sizes=(40,300),
+            alpha=0.8
+        )
 
-    plt.savefig("static/images/pie_chart.png", dpi=200)
+        plt.title("Customer Income vs Spending Score")
+        plt.xlabel("Annual Income (k$)")
+        plt.ylabel("Spending Score")
 
-    plt.close()
+        plt.legend([], [], frameon=False)
 
-    # Bar Chart
-    plt.figure(figsize=(8,5))
-
-    plt.bar(count.keys(), count.values())
-
-    plt.title("Customer Segment Count")
-    plt.xlabel("Segments")
-    plt.ylabel("Customers")
-
-    plt.xticks(rotation=15)
-
-    plt.tight_layout()
-
-    plt.savefig("static/images/bar_chart.png", dpi=200)
-
-    plt.close()
+        plt.tight_layout()
+        plt.savefig("static/images/bubble_chart.png", dpi=300)
+        plt.close()
 
     return render_template(
         "dashboard.html",
         total_predictions=total_predictions,
-        predictions=predictions
+        predictions=predictions,
     )
 
 @app.route("/logout")
